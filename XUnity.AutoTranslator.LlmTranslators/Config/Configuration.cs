@@ -25,7 +25,7 @@ public static class Configuration
     {
         //AutoTranslator Configuration details are public so we have to do this work around
         //Check for ReiPatcher or BepinEx and handle foreign chars       
-        Directory.SetCurrentDirectory($"{Assembly.GetExecutingAssembly().Location}/../../../../");
+        Directory.SetCurrentDirectory($"{Assembly.GetExecutingAssembly().Location}/../../config/");
         string ReiPatcherFolder = Path.GetFullPath(Path.Combine(".", "AutoTranslator"));
         string BepinExFolder = Path.GetFullPath(Path.Combine(".", "BepInEx"));
 
