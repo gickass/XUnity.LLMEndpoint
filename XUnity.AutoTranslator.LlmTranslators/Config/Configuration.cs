@@ -23,19 +23,19 @@ public static class Configuration
 {
     public static string CalculateConfigFolder()
     {
-        //AutoTranslator Configuration details are public so we have to do this work around
-        //Check for ReiPatcher or BepinEx and handle foreign chars       
-        Directory.SetCurrentDirectory($"{Assembly.GetExecutingAssembly().Location}/../../../../../");
-        string ReiPatcherFolder = Path.GetFullPath(Path.Combine(".", "AutoTranslator"));
-        string BepinExFolder = Path.GetFullPath(Path.Combine(".", "BepInEx", "config"));
+        string gameRoot = AppDomain.CurrentDomain.BaseDirectory;
 
-        string folder;
-        if (Directory.Exists(ReiPatcherFolder))
-            folder = ReiPatcherFolder;
-        else
-            folder = BepinExFolder;
+        string reiPatcher = Path.Combine(gameRoot, "AutoTranslator");
+        string bepinEx = Path.Combine(gameRoot, "BepInEx", "config");
 
-        return folder;
+        if (Directory.Exists(reiPatcher))
+            return reiPatcher;
+
+        if (Directory.Exists(bepinEx))
+            return bepinEx;
+
+        throw new DirectoryNotFoundException(
+           "Could not find AutoTranslator or BepInEx config folder.");
     }
 
     public static LlmConfig GetConfiguration(string file)
@@ -67,7 +67,7 @@ public static class Configuration
     public static void LoadGlossary(LlmConfig config, string file)
     {
         if (!File.Exists(file))
-           return;
+            return;
 
         var yamlDeserializer = new DeserializerBuilder()
             .WithNamingConvention(new CamelCaseNamingConvention())
