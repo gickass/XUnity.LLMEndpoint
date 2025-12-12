@@ -9,6 +9,7 @@ namespace XUnity.AutoTranslator.LlmTranslators.Tests;
 
 public class PromptTests
 {
+
     const string workingDirectory = "../../../";
     const string sampleDirectory = $"{workingDirectory}/../XUnity.AutoTranslator.LlmTranslators/SampleConfig/";
 
@@ -21,7 +22,8 @@ public class PromptTests
         var client = new HttpClient();
         var content = new StringContent(payload, Encoding.UTF8, "application/json");
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", System.Environment.GetEnvironmentVariable("AutoTranslator_API_Key"));
-        var response = await client.PostAsync(config.Url, content);
+        var endpointUrl = config.Urls.FirstOrDefault();
+        var response = await client.PostAsync(endpointUrl, content);
 
         var responseContent = await response.Content.ReadAsStringAsync();
     }
@@ -37,7 +39,8 @@ public class PromptTests
         var client = new HttpClient();
         var content = new StringContent(payload, Encoding.UTF8, "application/json");
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", System.Environment.GetEnvironmentVariable("AutoTranslator_API_Key"));
-        var response = await client.PostAsync(config.Url, content);
+        var endpointUrl = config.Urls.FirstOrDefault();
+        var response = await client.PostAsync(endpointUrl, content);
 
         var responseContent = await response.Content.ReadAsStringAsync();
         File.WriteAllText($"{workingDirectory}/TestOutput/OpenAiPayloadGenTest.json", responseContent);
@@ -80,7 +83,8 @@ public class PromptTests
         {
             var request = BaseEndpointBehavior.GetRequestData(config, raws[i]);
             var content = new StringContent(request, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(config.Url, content, _);
+            var endpointUrl = config.Urls.FirstOrDefault();
+            var response = await client.PostAsync(endpointUrl, content, _);
 
             var responseContent = await response.Content.ReadAsStringAsync(_);
 

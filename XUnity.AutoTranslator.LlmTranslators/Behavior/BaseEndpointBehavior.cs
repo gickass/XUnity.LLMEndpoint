@@ -3,10 +3,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using XUnity.AutoTranslator.LlmTranslators.Config;
 
-namespace XUnity.AutoTranslator.LlmTranslators.Behavior;
 
 public static class BaseEndpointBehavior
 {
+    public static string CombineUrl(string domain, string path) => $"{domain.TrimEnd('/')}/{path.TrimStart('/')}";
+    public static string GetDomain(string url) => new Uri(url).GetLeftPart(UriPartial.Authority);
     public static string GetRequestData(LlmConfig config, string raw)
     {
         var systemPrompt = new StringBuilder(config.SystemPrompt);
@@ -82,7 +83,7 @@ public static class BaseEndpointBehavior
         // If we do any other clean up should be done here
         if ((result.StartsWith("\"") && result.EndsWith("\""))
             || (result.StartsWith("'") && result.EndsWith("'")))
-            result = result.Substring(1, result.Length - 2);      
+            result = result.Substring(1, result.Length - 2);
 
         //Take out wide quotes
         result = result
@@ -90,7 +91,7 @@ public static class BaseEndpointBehavior
             .Replace("‘", "'");
 
         result = Regex.Unescape(result);
-        
+
         //Make sure first character is upper case
         if (Char.IsLower(result[0]) && raw != result)
             result = Char.ToUpper(result[0]) + result.Substring(1, result.Length - 1);
