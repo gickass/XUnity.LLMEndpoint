@@ -55,16 +55,18 @@ public static class Configuration
                 {
                     Combine("responses"),
                     Combine("v1/responses"),
-                     Combine("v1/chat/completions"),
+                    Combine("v1/chat/completions"),
                     Combine("chat/completions"),
                 };
                 foreach (var url in variants)
                 {
                     try
                     {
+                        Console.WriteLine($"{url}");
                         var req = (HttpWebRequest)WebRequest.Create(url);
                         req.Method = "POST";
                         req.ContentType = "application/json";
+                        req.Timeout = 3000;
                         if (!string.IsNullOrWhiteSpace(config.ApiKey))
                             req.Headers["Authorization"] = $"Bearer {config.ApiKey}";
 
@@ -82,15 +84,21 @@ public static class Configuration
                             }}");
                         }
                         using var resp = (HttpWebResponse)req.GetResponse();
+                        if (resp.StatusCode == HttpStatusCode.OK)
+                        {
                         config.Urls = new List<string> { url };
-                        endpointFound = true;
                         break;
+                        }
                     }
-                    catch {}
+                    catch (WebException ex)
+                    {
+                        if (ex.Response is HttpWebResponse response && response.StatusCode == (HttpStatusCode)429)
+                        Console.WriteLine($"Endpoint rate-limited (429 Too Many Requests): {url}");
+                    }
                 }
-                if (!endpointFound)
-                throw new Exception("No valid endpoint URL found or API Key is not provided on required endpoint.");
             }
+            if (!endpointFound)
+                throw new Exception("No valid endpoint URL found or API Key is not provided on required endpoint.");
 
             // When model is not set (Usually for local)
             if (string.IsNullOrWhiteSpace(config.Model))
