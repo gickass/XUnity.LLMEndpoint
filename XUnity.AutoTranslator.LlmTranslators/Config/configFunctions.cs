@@ -95,7 +95,7 @@ public static class ConfigFunctions
 
                 try
                 {
-                    Console.WriteLine($"Checking {url}...");
+                    // Console.WriteLine($"Checking {url}...");
 
                     var req = (HttpWebRequest)WebRequest.Create(url);
                     req.Method = "POST";
@@ -136,10 +136,10 @@ public static class ConfigFunctions
                         }
                     }
                 }
-                catch (WebException ex)
+                catch (WebException)
                 {
-                    if (ex.Response is HttpWebResponse response)
-                        Console.WriteLine($"Failed {url} - Status Code: {(int)response.StatusCode} ({response.StatusCode})");
+                    // if (ex.Response is HttpWebResponse response)
+                    //    Console.WriteLine($"Failed {url} - Status Code: {(int)response.StatusCode} ({response.StatusCode})");
                 }
             });
         }

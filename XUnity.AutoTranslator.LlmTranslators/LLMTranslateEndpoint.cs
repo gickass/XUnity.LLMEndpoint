@@ -24,18 +24,11 @@ public class LLMTranslatorEndpoint : HttpEndpoint
         context.SetTranslationDelay(0.1f);
         context.DisableSpamChecks();
     }
-    private string GetEndpointUrl()
-    {
-        if (_config.Url != null)
-        return _config.Url;
-
-        throw new InvalidOperationException("No valid endpoint URL is configured.");
-    }
 
     public override void OnCreateRequest(IHttpRequestCreationContext context)
     {
         var requestData = BaseEndpointBehavior.GetRequestData(_config, context.UntranslatedText);
-        var request = new XUnityWebRequest("POST", GetEndpointUrl(), requestData);
+        var request = new XUnityWebRequest("POST", _config.Url, requestData);
         request.Headers[HttpRequestHeader.ContentType] = "application/json";
 
         if (_config.ApiKeyRequired)
