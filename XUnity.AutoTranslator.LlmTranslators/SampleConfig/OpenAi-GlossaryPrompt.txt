@@ -1,3 +1,0 @@
-﻿#Glossary for Consistent Translations
-Use the translation for exact matches.
-## Terms

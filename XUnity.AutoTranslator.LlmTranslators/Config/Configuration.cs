@@ -9,6 +9,7 @@ public class LlmConfig
     public string? ApiKey { get; set; }
     public string Url { get; set; } = string.Empty;
     public string Model { get; set; } = string.Empty;
+    public int? MaxConcurrency { get; set; }
     public string SystemPrompt { get; set; } = string.Empty;
     public string GlossaryPrompt { get; set; } = string.Empty;
     public Dictionary<string, object> ModelParams { get; set; } = new Dictionary<string, object>();

@@ -1,7 +1,8 @@
-﻿apiKey: "Change me"
-apiKeyRequired: true
-url: "https://api.openai.com/v1/chat/completions"
-model: "gpt-4o-mini"
+﻿## LLM configuration
+apiKey: "Change me or leave it blank if local endpoint"
+url: "api.deepseek.com"
+model: "deepseek-chat"
+maxConcurrency: 5 # Set how many translation request at the same time. Recommended to leave it at 5 or lower for local
 modelParams:
   temperature: 0.2
   top_p: 0.9
@@ -13,3 +14,10 @@ glossaryPrompt: |
   #Glossary for Consistent Translations
   Use the translation for exact matches.
   ## Terms
+glossaryLines:
+  - raw: ゲーム
+    result: Game
+  - raw: 終了
+    result: Exit
+  - raw: 主人
+    result: Master

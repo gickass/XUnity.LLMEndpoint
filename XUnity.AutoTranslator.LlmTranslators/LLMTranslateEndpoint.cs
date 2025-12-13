@@ -12,7 +12,7 @@ public class LLMTranslatorEndpoint : HttpEndpoint
     public override int MaxTranslationsPerRequest => 1;
 
     // Careful not to melt machines
-    public override int MaxConcurrency => 5;
+    public override int MaxConcurrency => _config.MaxConcurrency ?? 5;
 
     private LlmConfig _config = new();
 
