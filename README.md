@@ -6,7 +6,7 @@ I fork this because I want to combine all config into 1 file (configLLM.yaml) pe
 
 If you are here only for missing config file fix, you can download [1.01](https://github.com/gickass/XUnity.LLMEndpoint/releases/tag/Fix) version [here](https://github.com/gickass/XUnity.LLMEndpoint/releases/tag/Fix) 
 
-Tested Online endpoint:
+**Tested Online endpoint:**
 - [OpenAI](https://platform.openai.com/)
 	- Probably the most popular LLM that has the highest quality but is not Free. Write `api.openai.com` in url config to use it
 - [DeepSeek](https://www.deepseek.com/)
@@ -14,7 +14,7 @@ Tested Online endpoint:
 - [Chutes AI](https://chutes.ai/app/api)
 	- Not recommended because unity send a lot request for text translation. After few seconds, you will get "Too Many Requests" (HTTP 429) from this endpoint  . Write `llm.chutes.ai` in url config to use it
  
-Local endpoint
+**Local endpoint**
 - [Ollama Models](https://ollama.com/)
 	- Ollama is a local hosting option for LLMs. You are able to run one or more llms on your local machine of varying size. This option is free but will require you to engineer your prompts dependant on the model and/or language. Write `localhost:11434` in url config to use it
 - [KoboldCpp](https://github.com/LostRuins/koboldcpp)
@@ -22,7 +22,7 @@ Local endpoint
  - [Text Generation Web UI](https://github.com/oobabooga/text-generation-webui)
  	- Good for local hosting. Write `localhost:5001` in url config to use it
 
-Not tested but may work (A lot of endpoint support OpenAI-compatible URL)
+**Not tested but may work (A lot of endpoint support OpenAI-compatible URL)**
 - [NanoGpt](https://nano-gpt.com/api)
 	- It has rate limit 25 per second of each request. Use `nano-gpt.com` in url config to use it
 - [OpenRouter](https://openrouter.ai)
@@ -104,6 +104,7 @@ We also use global environment variables so you can just set your API Key once a
 ~~These files are:~~
   	~~- `ConfigLLMOverride.yaml`~~
 	~~- Use this file to update your system prompt~~
+
 I plan to make PromptLLMEndpoint.yaml too because maybe some specific game can translate well if it has system or glossary prompt with its context, and you can swap with it easily
 
 # Glossary
@@ -139,8 +140,6 @@ Please note the prompt is what actually tells ChatGPT what to translate. Some th
 - Make sure you tell it how to translate names whether you want literal translation or keep the original names
 
 A test project is included with the project. The [PromptTests](./XUnity.AutoTranslator.LlmTranslators.Tests/PromptTests.cs) will let you easily change your prompt based on your model and compare outputs to some ChatGPT4o pretranslated values. These are a good baseline to compare your prompts or other models to, most cases will show you where the model will lose the plot and hallucinate.
-
-[# Download](https://github.com/gickass/XUnity.LLMEndpoint/releases/tag/Release)
 
 # Packages
 
