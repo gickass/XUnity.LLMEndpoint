@@ -2,7 +2,7 @@
 
 This is a fork from [joshfreitas1984/XUnity.AutoTranslate.LlmTranslators](https://github.com/joshfreitas1984/XUnity.AutoTranslate.LlmTranslators)
 
-I fork this because I want to combine all config into 1 file (configLLM.yaml) personally for convenience. So it won't support with the same config with joshfreitas1984 branch. Latest version is on [release](https://github.com/gickass/XUnity.LLMEndpoint/releases/tag/Release)
+I fork this because I want to combine all config into 1 file (configLLM.yaml) personally for convenience. So it won't support with the same config with joshfreitas1984 branch. I changed the name to avoid confusion with joshfreitas1984 version. Latest version is on [release](https://github.com/gickass/XUnity.LLMEndpoint/releases/tag/Release)
 
 If you are here only for missing config file fix, you can download [1.01](https://github.com/gickass/XUnity.LLMEndpoint/releases/tag/Fix) version [here](https://github.com/gickass/XUnity.LLMEndpoint/releases/tag/Fix) 
 
